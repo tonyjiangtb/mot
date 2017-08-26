@@ -11,11 +11,11 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 public class AppInitializer implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext container) {
-        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.register(ServiceConfiguration.class);
-        container.addListener(new ContextLoaderListener(context));
-
-        ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new CXFServlet());
-        dispatcher.addMapping("/soap/*");
+//        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+//        context.register(ServiceConfiguration.class);
+//        container.addListener(new ContextLoaderListener(context));
+//
+//        ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new CXFServlet());
+//        dispatcher.addMapping("/soap/*");
     }
 }

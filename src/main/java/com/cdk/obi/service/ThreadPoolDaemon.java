@@ -1,29 +1,38 @@
 package com.cdk.obi.service;
 
-import javax.xml.ws.Endpoint;
-import org.apache.cxf.jaxws.EndpointImpl;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextStartedEvent;
 
-import com.cdk.obi.soapif.StockQuoteReporter;
+public class ThreadPoolDaemon  {
 
-@Configuration
-public class ThreadPoolDaemon {
+	private ExecutorService executor = null;
 
-	ThreadPoolDaemon(){
+	public ThreadPoolDaemon() {
 		System.out.println("daemon created");
 	}
 
+	public void Submit(Runnable worker) {
+		executor.execute(worker);
+	}
 
-	    @Bean
-	    public Endpoint endpoint() {
-	        //EndpointImpl endpoint = new EndpointImpl(null, new BaeldungImpl());
-	    	EndpointImpl endpoint = new EndpointImpl(null, new BaeldungImpl());
-	    	//StockQuoteReporter endpoint =new StockQuoteReporter();
-	        endpoint.publish("http://localhost:8081/services/baeldung");
-	        return endpoint;
-	    }
+	public void Start(String[] args) {
+		if (executor == null) {
+			executor = Executors.newFixedThreadPool(20);
+		}
+	}
+
+	public void Stop() {
+		if (executor != null) {
+			executor.shutdown();
+			while (!executor.isTerminated()) {
+			}
+			executor = null;
+			System.out.println("Finished all threads");
+		}
+	}
+
 
 }
