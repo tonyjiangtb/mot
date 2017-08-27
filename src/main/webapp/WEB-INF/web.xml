@@ -37,7 +37,7 @@
 
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/mot</url-pattern>
+		<url-pattern>/mot/*</url-pattern>
 	</servlet-mapping>
 
 </web-app>
