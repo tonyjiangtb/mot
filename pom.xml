@@ -43,6 +43,11 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 		<!-- Jackson httpmessageconverter -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
